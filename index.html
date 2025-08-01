@@ -1,21 +1,42 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <!-- Metatag para garantir a visualização correta em dispositivos móveis -->
+    <!-- 1. Título alterado -->
+    <title>Experiência AR Cartão Orbee 360</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-
-    <!-- Importa a biblioteca A-Frame -->
     <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
-
-    <!-- Importa a biblioteca MindAR para A-Frame -->
     <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
+
+    <style>
+      body {
+        margin: 0;
+        overflow: hidden;
+      }
+      .logo-container {
+        position: absolute;
+        bottom: 20px;
+        right: 20px;
+        z-index: 9999;
+      }
+      .logo-container img {
+        height: 40px;
+        width: auto;
+        display: block;
+        opacity: 0.8;
+      }
+    </style>
   </head>
+
   <body>
-    <!-- 
-      A cena principal do A-Frame, configurada para usar o MindAR.
-      - imageTargetSrc: Aponta para o seu arquivo de alvos local.
-      - vr-mode-ui="enabled: false": Desabilita o botão de VR.
-    -->
+    <!-- Logo no canto inferior direito -->
+    <a
+      href="https://bio.link/orbee360"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="logo-container"
+    >
+      <img src="./orbee360.png" alt="Logo Orbee 360" />
+    </a>
     <a-scene
       mindar-image="imageTargetSrc: ./targets.mind;"
       vr-mode-ui="enabled: false"
