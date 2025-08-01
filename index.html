@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <!-- 1. Título alterado -->
-    <title>Experiência AR Cartão Orbee 360</title>
+    <title>Experiência AR Proforms</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
@@ -37,43 +36,49 @@
     >
       <img src="./orbee360.png" alt="Logo Orbee 360" />
     </a>
+
+    <!-- Cena MindAR -->
     <a-scene
       mindar-image="imageTargetSrc: ./targets.mind;"
       vr-mode-ui="enabled: false"
       device-orientation-permission-ui="enabled: false"
     >
-      <!-- 
-        1. A "DESPENSA" (<a-assets>):
-           Pré-carregamos sua imagem aqui para que ela apareça instantaneamente.
-           - Damos a ela o ID "orbeeImg" para que possamos usá-la depois.
-           - O caminho (src) aponta para o arquivo na mesma pasta.
-      -->
+      <!-- 1. "DESPENSA": Carregamos a sua foto 360° -->
       <a-assets>
-        <img id="orbeeImg" src="./orbee.webp" />
+        <img id="fotosfera-img" src="./tour.jpg" />
       </a-assets>
 
-      <!-- A câmera é controlada pelo MindAR -->
       <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
 
-      <!-- 
-        2. O "PALCO" (<a-entity>):
-           Este é o conteúdo que REALMENTE aparece quando o alvo (seu cartão) é encontrado.
-           - targetIndex="0": Refere-se ao primeiro alvo dentro do seu arquivo targets.mind.
-      -->
+      <!-- 2. "PALCO": O conteúdo que aparece sobre o cartão -->
       <a-entity mindar-image-target="targetIndex: 0">
-        <!--
-          3. O OBJETO VISÍVEL (<a-image>):
-             Esta é a tag para exibir uma imagem.
-             - src="#orbeeImg": Pega a imagem que carregamos nos assets.
-             - width="1": Define a largura da imagem como 1 unidade no mundo 3D.
-               A altura será ajustada automaticamente para manter a proporção da imagem original.
+        <!-- 
+          3. A FOTOSFERA FLUTUANTE:
+          Esta é a nossa esfera 3D.
+          - src="#fotosfera-img": Aplica sua imagem 360° na superfície da esfera.
+          - radius="0.5": Define o tamanho da esfera.
+          - position="0 0.5 0": Levanta a esfera para que ela flutue acima do cartão.
+          - animation: Faz a esfera girar lentamente sobre o eixo Y.
         -->
-        <a-image
-          src="#orbeeImg"
-          position="0 0 0"
+        <a-sphere
+          src="#fotosfera-img"
+          radius="0.5"
+          position="0 0.5 0"
           rotation="0 0 0"
-          width="1"
-        ></a-image>
+          animation="property: rotation; to: 0 360 0; loop: true; dur: 20000; easing: linear;"
+        ></a-sphere>
+
+        <!-- 
+          4. O TEXTO 3D (Opcional):
+          Um texto que flutua abaixo da esfera.
+        -->
+        <a-text
+          value="Veja nosso trabalho em 360 graus"
+          color="#FFFFFF"
+          align="center"
+          position="0 -0.2 0"
+          scale="0.3 0.3 0.3"
+        ></a-text>
       </a-entity>
     </a-scene>
   </body>
